@@ -125,5 +125,30 @@ public class ItensDaVendaDaoJDBC implements ItensDaVendaDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public List<ItensDaVenda> maiorValor(){
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"select idvenda, id_livro, qtd, subtotal "
+					+ "from itens_da_venda "
+					+ "order by subtotal desc");
+				rs = st.executeQuery();
+				if (rs.next()) {
+					ItensDaVenda obj = new ItensDaVenda();
+					obj.setIdvenda(rs.getInt("idvenda"));
+					obj.setQuantidade(rs.getInt("qtd"));
+					obj.setSubtotal(rs.getDouble("subtotal"));
+				}
+					return null;
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+	}
 
 }

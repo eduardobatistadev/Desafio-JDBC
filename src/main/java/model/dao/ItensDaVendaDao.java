@@ -9,4 +9,5 @@ public interface ItensDaVendaDao {
 	void deleteById(Integer id);
 	ItensDaVenda findById(Integer id);
 	List<ItensDaVenda> findAll();
+	List<ItensDaVenda> maiorValor();
 }
